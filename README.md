@@ -59,8 +59,9 @@ Gestion centralisée des entités « modules » via une API REST ou des formulai
 
 Fichier SQL préconfiguré pour créer la base de données et les tables.
 
-Structure de la Base de Données
+### Structure de la Base de Données
 
+```
 Base de données PostgreSQL : f1_dashboard
 
 Table : modules
@@ -96,6 +97,7 @@ victories : Nombre de victoires
 created_at : Date de création
 
 updated_at : Date de mise à jour
+```
 
 Technologies Utilisées
 
