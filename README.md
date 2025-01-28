@@ -23,11 +23,13 @@ Créez un fichier .env à la racine de votre projet. Ce fichier contiendra vos v
 
 # Fichier .env
 
-```DB_HOST=localhost
+```
+DB_HOST=localhost
 DB_NAME=f1_dashboard
 DB_USER=postgres
 DB_PASSWORD=votre_mot_de_passe
-DB_PORT=5432```
+DB_PORT=5432
+```
 
 > [!CAUTION]
 Remarque : Ne partagez jamais ce fichier avec le reste du monde ! Ajoutez-le à votre fichier .gitignore pour éviter qu’il ne soit suivi par Git.
