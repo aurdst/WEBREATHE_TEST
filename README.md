@@ -10,7 +10,7 @@ Le projet vise à développer une application complète basée sur un backend en
 ## Gestion des Modules
 
 Chaque module représente un élément essentiel d’une Formule 1 et contient les informations suivantes :
-
+```
 Titre
 
 Description
@@ -42,7 +42,7 @@ Détail des consommables clés :
 Freins : Nombre de freins installés et leur état (exemple : "Neufs", "Usés").
 
 Pneus : Nombre de pneus installés et leur état (exemple : "À remplacer", "Usés").
-
+```
 # Visualisation en temps réel
 
 Dashboard dynamique et intuitif construit avec Bootstrap, affichant :
@@ -99,7 +99,7 @@ created_at : Date de création
 updated_at : Date de mise à jour
 ```
 
-Technologies Utilisées
+### Technologies Utilisées
 
 Backend : PHP
 
@@ -123,9 +123,10 @@ Grille Bootstrap pour organiser les cartes et tableaux.
 
 Animation pour un affichage fluide des données.
 
-AJAX (optionnel)
+> [!NOTE]
+> AJAX (optionnel)
 
-Recharge des données sans recharger la page pour une expérience utilisateur optimale.
+> Recharge des données sans recharger la page pour une expérience utilisateur optimale.
 
 ## Livrables
 
