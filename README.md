@@ -5,6 +5,33 @@ Projet : Dashboard de gestion et de suivi des performances de modules de Formule
 
 Le projet vise à développer une application complète basée sur un backend en PHP et une interface utilisateur en HTML, CSS et Bootstrap. L'objectif principal est de créer un dashboard permettant de visualiser en temps réel les performances de modules de Formule 1, comme des voitures Mercedes ou Ferrari. Ce dashboard est destiné à fournir des informations clés sur les paramètres techniques et l'état des consommables pour aider les équipes techniques à optimiser leurs stratégies.
 
+> [!IMPORTANT]
+> Étape 1 : Installer et Configurer un Package pour .env
+> Installer la bibliothèque Dotenv
+> Utilisez Composer pour installer le package vlucas/phpdotenv, qui
+> permet de gérer facilement les fichiers .env.
+
+> Si vous n’avez pas encore installé Composer, vous pouvez le télécharger > ici : https://getcomposer.org/.
+
+> Ensuite, exécutez la commande suivante dans le répertoire de votre projet PHP :
+
+```composer require vlucas/phpdotenv```
+>Une fois installé, le package est prêt à être utilisé.
+
+> Étape 2 : Créer un fichier .env
+Créez un fichier .env à la racine de votre projet. Ce fichier contiendra vos variables sensibles, comme ceci :
+
+# Fichier .env
+
+```DB_HOST=localhost
+DB_NAME=f1_dashboard
+DB_USER=postgres
+DB_PASSWORD=votre_mot_de_passe
+DB_PORT=5432```
+
+> [!CAUTION]
+Remarque : Ne partagez jamais ce fichier avec le reste du monde ! Ajoutez-le à votre fichier .gitignore pour éviter qu’il ne soit suivi par Git.
+
 # Fonctionnalités principales
 
 ## Gestion des Modules
