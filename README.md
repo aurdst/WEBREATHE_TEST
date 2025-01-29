@@ -159,19 +159,19 @@ Animation pour un affichage fluide des données.
 
 ## Livrables
 
-Dashboard fonctionnel :
+### Dashboard fonctionnel :
 
 Interface utilisateur prête à l'emploi pour visualiser les données des modules.
 
 Données actualisées dynamiquement ou via soumission manuelle.
 
-Backend PHP :
+### Backend PHP :
 
 Scripts PHP pour la gestion de la base de données et l'intégration frontend.
 
 Endpoint API (si requis).
 
-Documentation :
+### Documentation :
 
 Fichier SQL pour créer la base de données.
 
