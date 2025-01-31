@@ -21,8 +21,6 @@ try {
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_EMULATE_PREPARES => false,
     ]);
-
-    echo "Connexion réussie à PostgreSQL.\n";
 } catch (PDOException $e) {
     die("Erreur de connexion : " . $e->getMessage());
 }

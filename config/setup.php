@@ -3,6 +3,11 @@
 // Inclure la connexion PDO (assurez-vous que votre fichier db.php est correct)
 require_once 'database/db.php'; 
 
+// Inclure Bootstrap pour l'affichage
+echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">';
+echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">';
+
+
 try {
     // Vérifier si la base de données existe déjà
     $dbName = $_ENV['DB_NAME'];
@@ -12,9 +17,30 @@ try {
     if (!$result->fetch()) {
         // Si la base de données n'existe pas, créer la base de données
         $pdo->exec("CREATE DATABASE $dbName");
-        echo "Base de données créée avec succès.";
+        echo '<div class="container mt-3">
+        <div class="card border-warning" id="alert-card-bdd">
+            <div class="card-body d-flex align-items-center">
+                <i class="bi bi-exclamation-triangle-fill text-warning fs-3 me-3"></i>
+                <div>
+                    <h5 class="card-title text-warning">Information</h5>
+                    <p class="card-text">Base de données créée avec succès.</p>
+                </div>
+            </div>
+        </div>
+      </div>';
     } else {
-        echo "La base de données existe déjà \n.";
+        echo '<div class="container mt-3 p-3">
+                <div class="card border-warning" id="alert-card-bdd">
+                <button type="button" class="btn-close ms-auto m-2 position-absolute" data-bs-dismiss="alert" aria-label="Close" id="close-alert-bdd"></button>
+                    <div class="card-body d-flex align-items-center">
+                        <i class="bi bi-exclamation-triangle-fill text-warning fs-3 me-3"></i>
+                        <div>
+                            <h5 class="card-title text-warning">Information</h5>
+                            <p class="card-text">La base de données existe déjà.</p>
+                        </div>
+                    </div>
+                </div>
+              </div>';
     }
 
     // Se connecter à la base de données créée
@@ -43,7 +69,18 @@ try {
 
     // Exécution de la requête pour créer la table
     $pdo->exec($createTableQuery);
-    echo "Table modules créée avec succès (si elle n'existait pas).\n";
+    echo '<div class="container mt-3 p-3">
+            <div class="card border-warning" id="alert-card-table">
+            <button type="button" class="btn-close ms-auto position-absolute" data-bs-dismiss="alert" aria-label="Close" id="close-alert-table"></button>
+                <div class="card-body d-flex align-items-center">
+                    <i class="bi bi-exclamation-triangle-fill text-warning fs-3 me-3"></i>
+                    <div>
+                        <h5 class="card-title text-warning">Information</h5>
+                        <p class="card-text">Table modules créée avec succès (si elle n\'existait pas).</p>
+                    </div>
+                </div>
+            </div>
+        </div>';
     
     // Ajouter les contraintes si elles n'existent pas
     // Vérification de l'existence de la contrainte valid_brakes_status
@@ -81,3 +118,16 @@ try {
     // En cas d'erreur de connexion ou d'exécution des requêtes
     die("Erreur de connexion ou d'exécution : " . $e->getMessage());
 }
+?>
+
+<script>
+    document.getElementById("close-alert-bdd").addEventListener("click", function() {
+        var alertCard = document.getElementById("alert-card-bdd");
+        alertCard.style.display = "none";
+    });
+
+    document.getElementById("close-alert-table").addEventListener("click", function() {
+        var alertCard = document.getElementById("alert-card-table");
+        alertCard.style.display = "none";
+    });
+</script>
