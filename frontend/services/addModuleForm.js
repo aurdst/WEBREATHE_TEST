@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
             alert('Module ajouté avec succès !');
             console.log(result); // Affiche la réponse JSON pour déboguer
+            // Refresh les données
+            loadModules();
   
             // Optionnel : Réinitialiser le formulaire après l'envoi
             addModuleForm.reset();

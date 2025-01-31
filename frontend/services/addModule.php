@@ -6,9 +6,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // Récupérer les données envoyées
         $title = $_POST['title'] ?? '';
+        $name = $_POST['name'] ?? '';
         $category = $_POST['category'] ?? '';
         $fuel_type = $_POST['fuel_type'] ?? '';
         $driver_name = $_POST['driver_name'] ?? '';
+        $description = $_POST['description'] ?? '';
 
         // Validation basique
         if (empty($title) || empty($category) || empty($fuel_type) || empty($driver_name)) {
@@ -18,13 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Préparation et exécution
-        $query = "INSERT INTO modules (title, category, fuel_type, driver_name) VALUES (:title, :category, :fuel_type, :driver_name)";
+        $query = "INSERT INTO modules (title, name, category, fuel_type, driver_name, description) VALUES (:title, :name, :category, :fuel_type, :driver_name, :description)";
         $stmt = $pdo->prepare($query);
         $stmt->execute([
             ':title' => $title,
+            ':name' => $name,
             ':category' => $category,
             ':fuel_type' => $fuel_type,
             ':driver_name' => $driver_name,
+            ':description' => $description,
         ]);
 
         // Réponse JSON en cas de succès

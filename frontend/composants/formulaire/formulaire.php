@@ -13,6 +13,10 @@
             <input type="text" class="form-control" id="title" name="title" required>
           </div>
           <div class="mb-3">
+            <label for="name" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          <div class="mb-3">
             <label for="category" class="form-label">Catégorie</label>
             <input type="text" class="form-control" id="category" name="category" required>
           </div>
@@ -24,7 +28,11 @@
             <label for="driverName" class="form-label">Nom du pilote</label>
             <input type="text" class="form-control" id="driverName" name="driver_name" required>
           </div>
-          <button type="submit" class="btn btn-success">Ajouter</button>
+          <div class="mb-3">
+              <label for="description" class="form-label">Description :</label>
+              <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ajouter</button>
         </form>
       </div>
     </div>

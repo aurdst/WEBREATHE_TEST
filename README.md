@@ -16,7 +16,7 @@ Le projet vise à développer une application complète basée sur un backend en
 > Ensuite, exécutez la commande suivante dans le répertoire de votre projet PHP :
 
 ```composer require vlucas/phpdotenv```
->Une fois installé, le package est prêt à être utilisé.
+> Une fois installé, le package est prêt à être utilisé.
 
 > Étape 2 : Créer un fichier .env
 Créez un fichier .env à la racine de votre projet. Ce fichier contiendra vos variables sensibles, comme ceci :
@@ -32,7 +32,11 @@ DB_PORT=5432
 ```
 
 > [!CAUTION]
+Utilisation de Postgres SQL 15, configuré avec PgAdmin 4 v7
 Remarque : Ne partagez jamais ce fichier avec le reste du monde ! Ajoutez-le à votre fichier .gitignore pour éviter qu’il ne soit suivi par Git.
+
+> [!NOTE]
+> Utilisation d'une extension VScode pour la visualisation des tables (optionnel)
 
 # Fonctionnalités principales
 
