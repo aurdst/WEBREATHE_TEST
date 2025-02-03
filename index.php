@@ -3,6 +3,8 @@
 require_once __DIR__ . '/vendor/autoload.php';
 require_once './database/db.php';
 require_once __DIR__ . '/config/setup.php';
+// require_once __DIR__ . '/config/clearTables.php'; // Nettoie les tables inutilisés
+require_once __DIR__ . '/config/generateTableByModule/create_module_tables.php';
 
 use Models\Module;
 
@@ -33,17 +35,31 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modules Dashboard</title>
+    <title>Dashboard F1</title>
     <!-- Lien vers Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<div class="container my-5">
-    <h1 class="text-center mb-4">Dashboard</h1>
+<div class="container my-2">
+    <h1 class="text-center mb-4">Listes des véhicules.</h1>
     <?php include 'frontend/composants/bouton/boutonAdd.php'; ?>
     <?php include 'frontend/composants/formulaire/formulaire.php'; ?>
+
+    <!-- GRAPHIQUE -->
+    <div class="container my-2">
+        <h1 class="text-center mb-4">Dashboard F1 - Vitesse moyenne du véhicule</h1>
+        <canvas id="myChart" width="200" height="100"></canvas>
+    </div>
+
+    <!-- GRAPHIQUE RADAR -->
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Dashboard F1 - Nombre de victoires par module</h1>
+        <canvas id="radarChart" width="200" height="200"></canvas>
+    </div>
+
+
     <div class="row">
         <?php while ($module = $result->fetch(PDO::FETCH_ASSOC)): ?>
             <div class="col-md-4 mb-4">
@@ -71,6 +87,17 @@ try {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/script.js"></script>
 <script src="frontend/services/addModuleForm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module">
+    import { fetchData } from './frontend/services/getStats.js';
+    import { fetchRadarData } from './frontend/services/statsJs/getStatsWinRadar.js';
+
+    // Appeler la fonction pour récupérer les données et créer le graphique
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchData();
+        fetchRadarData();
+    });
+</script>
 
 </body>
 </html>

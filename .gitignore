@@ -1,3 +1,4 @@
 ./config/config.js
 ./config/setup.php
+.set_modules.php
 .env

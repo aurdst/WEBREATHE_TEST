@@ -7,7 +7,6 @@ require_once 'database/db.php';
 echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">';
 echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">';
 
-
 try {
     // Vérifier si la base de données existe déjà
     $dbName = $_ENV['DB_NAME'];

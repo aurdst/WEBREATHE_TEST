@@ -40,9 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Erreur lors du chargement des modules', error);
       }
     }
-
-    // Appel de la function
-    loadModules();
   
     if (addModuleForm) {
       addModuleForm.addEventListener('submit', async (event) => {
@@ -59,8 +56,26 @@ document.addEventListener('DOMContentLoaded', () => {
   
           if (response.ok) {
             const result = await response.json();
-            alert('Module ajouté avec succès !');
             console.log(result); // Affiche la réponse JSON pour débug
+
+            fetch('./frontend/services/addModule.php', {
+                  method: 'POST',
+                  body: formData
+              })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      // Exécuter le script pour créer la table dynamique du module
+                      fetch('../../config/create_module_tables.php')
+                          .then(() => {
+                              console.log('Tables modules vérifiées/créées.');
+                              loadModules();
+                          })
+                          .catch(error => console.error('Erreur lors de la vérification des tables modules:', error));
+                  } else {
+                      console.error('Erreur:', data.error);
+                  }
+              });
             
             // Optionnel : Réinitialiser le formulaire après l'envoi
             addModuleForm.reset();
