@@ -1,23 +1,33 @@
 // Déclaration globale du graphique radar
 let radarChart = null;
+let currentModuleId = null;
 
-export async function fetchRadarData() {
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', function() {
+            const moduleId = this.getAttribute('data-id');  // Récupérer l'id du module
+            currentModuleId = moduleId;
+            fetchRadarData(moduleId);;  // Récupérer les données spécifiques au module
+        });
+    });
+});
+
+export async function fetchRadarData(currentModuleId) {
     try {
-        const response = await fetch('frontend/services/getStatsWin.php'); // Appel AJAX au backend
+        const response = await fetch(`frontend/services/getStatsWin.php?module_id=${currentModuleId}`);
         const data = await response.json();
 
-        
-        // Extraire les labels (module_id) et les valeurs (victoires)
-        const fuel = data.map(module => module.fuel_consumption);
-        const victories = data.map(module => module.victories);
-        console.log('Données radar récupérées:', victories);
-
-        const ctx = document.getElementById('radarChart').getContext('2d');
-
-        // Si un graphique existe déjà, le détruire avant d'en créer un nouveau
-        if (radarChart) {
-            radarChart.destroy();
+        // Vérifier s'il y a une erreur ou si les données sont vides
+        if (data.error) {
+            console.error(data.error);
+            return;
         }
+
+        // Extraire les labels (module_id) et les valeurs (victoires)
+        const fuel = data.map(item => item.fuel_consumption);  
+        const victories = data.map(item => item.victories);
+        
+        const ctx = document.getElementById(`radarChart-${currentModuleId}`).getContext('2d');
 
         // Création du Radar Chart
         radarChart = new Chart(ctx, {
@@ -36,7 +46,7 @@ export async function fetchRadarData() {
                     pointHoverBorderColor: 'rgb(255, 159, 64)'
                 },
                 {
-                    label: 'Essence consomée',
+                    label: 'Litres / 100 km',
                     data: fuel, // Nombre de victoires par module
                     backgroundColor: 'rgba(17, 0, 165, 0.2)',
                     borderColor: 'rgb(62, 0, 177)',
@@ -57,9 +67,6 @@ export async function fetchRadarData() {
                 }
             }
         });
-
-        console.log('RadarChart créé:', radarChart);
-
     } catch (error) {
         console.error('Erreur lors de la récupération des données radar:', error);
     }

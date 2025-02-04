@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fonction pour charger les modules depuis la bdd dynamiquement
     async function loadModules() {
       try {
-        console.log("Appel de getModules.php...");
         const response = await fetch('frontend/services/getModules.php');
         const modules = await response.json();
 

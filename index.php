@@ -47,23 +47,10 @@ try {
     <?php include 'frontend/composants/bouton/boutonAdd.php'; ?>
     <?php include 'frontend/composants/formulaire/formulaire.php'; ?>
 
-    <!-- GRAPHIQUE -->
-    <div class="container my-2">
-        <h1 class="text-center mb-4">Dashboard F1 - Vitesse moyenne du véhicule</h1>
-        <canvas id="myChart" width="200" height="100"></canvas>
-    </div>
-
-    <!-- GRAPHIQUE RADAR -->
-    <div class="container my-5">
-        <h1 class="text-center mb-4">Dashboard F1 - Nombre de victoires par module</h1>
-        <canvas id="radarChart" width="200" height="200"></canvas>
-    </div>
-
-
     <div class="row">
         <?php while ($module = $result->fetch(PDO::FETCH_ASSOC)): ?>
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm">
+            <div class="card shadow-sm my-5" data-id="<?php echo htmlspecialchars($module['module_id']); ?>">
+                <div class="col-md-4 mb-4">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo htmlspecialchars($module['title']); ?></h5>
 
@@ -78,24 +65,28 @@ try {
                         </p>
                     </div>
                 </div>
+                <?php include 'frontend/composants/graphic/graphic.php'; ?>
             </div>
-        <?php endwhile; ?>
+            <?php endwhile; ?>
+        </div>
     </div>
-</div>
-
+    
 <!-- Scripts Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/script.js"></script>
 <script src="frontend/services/addModuleForm.js"></script>
+<script src="frontend/composants/graphic/graphicToggle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module">
     import { fetchData } from './frontend/services/getStats.js';
     import { fetchRadarData } from './frontend/services/statsJs/getStatsWinRadar.js';
+    import { fetchTiresData } from './frontend/services/statsJs/tiresStatus.js'
 
     // Appeler la fonction pour récupérer les données et créer le graphique
     document.addEventListener('DOMContentLoaded', () => {
         fetchData();
         fetchRadarData();
+        fetchTiresData();
     });
 </script>
 

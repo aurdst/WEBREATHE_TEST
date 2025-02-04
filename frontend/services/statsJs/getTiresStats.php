@@ -1,10 +1,11 @@
 <?php
-require_once '../../database/db.php';
+require_once '../../../database/db.php';
 
 header('Content-Type: application/json; charset=utf-8');
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 
 if (!isset($_GET['module_id']) || empty($_GET['module_id'])) {
     echo json_encode(["error" => "Module ID invalide ou manquant."]);
@@ -29,8 +30,15 @@ if (!$tableExists) {
     exit;
 }
 
-// Exécuter la requête
-$query = "SELECT victories, fuel_consumption, module_id FROM \"$tableName\" LIMIT 10";
+$query = "SELECT 
+            SUM(CASE WHEN tires_status = 'Neuf' THEN 1 ELSE 0 END) AS new_tires,
+            SUM(CASE WHEN tires_status = 'Usé' THEN 1 ELSE 0 END) AS used_tires,
+            SUM(CASE WHEN tires_status = 'Endommagé' THEN 1 ELSE 0 END) AS damaged_tires,
+            SUM(CASE WHEN tires_status IN ('Neuf', 'Usé') THEN 1 ELSE 0 END) AS good_condition,
+            SUM(CASE WHEN tires_status = 'Endommagé' THEN 1 ELSE 0 END) AS need_replacement
+            FROM \"$tableName\"
+            LIMIT 10";
+
 $stmt = $pdo->prepare($query);
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC | PDO::FETCH_NAMED);
