@@ -16,7 +16,7 @@ try {
     if (!$result->fetch()) {
         // Si la base de données n'existe pas, créer la base de données
         $pdo->exec("CREATE DATABASE $dbName");
-        echo '<div class="container mt-3">
+        $alerts .= '<div class="container mt-3">
         <div class="card border-warning" id="alert-card-bdd">
             <div class="card-body d-flex align-items-center">
                 <i class="bi bi-exclamation-triangle-fill text-warning fs-3 me-3"></i>
@@ -28,7 +28,7 @@ try {
         </div>
       </div>';
     } else {
-        echo '<div class="container mt-3 p-3">
+        $alerts .= '<div class="container mt-3 p-3">
                 <div class="card border-warning" id="alert-card-bdd">
                 <button type="button" class="btn-close ms-auto m-2 position-absolute" data-bs-dismiss="alert" aria-label="Close" id="close-alert-bdd"></button>
                     <div class="card-body d-flex align-items-center">
@@ -68,7 +68,7 @@ try {
 
     // Exécution de la requête pour créer la table
     $pdo->exec($createTableQuery);
-    echo '<div class="container mt-3 p-3">
+    $alerts .= '<div class="container mt-3 p-3">
             <div class="card border-warning" id="alert-card-table">
             <button type="button" class="btn-close ms-auto position-absolute" data-bs-dismiss="alert" aria-label="Close" id="close-alert-table"></button>
                 <div class="card-body d-flex align-items-center">

@@ -9,25 +9,6 @@ require_once __DIR__ . '/config/generateTableByModule/create_module_tables.php';
 use Models\Module;
 
 // A inséré ici => Voir dans config/set_models.php pour la l'initiation manuelle d'un module
-
-// Tester une requête simple
-try {
-    $query = $pdo->query("SELECT 'Connexion OK' AS message;");
-    $result = $query->fetch(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Erreur lors de l'exécution : " . $e->getMessage();
-}
-?>
-
-<?php
-
-try {
-    // Récupérer les modules
-    $query = "SELECT * FROM modules";
-    $result = $pdo->query($query);
-} catch (PDOException $e) {
-    die("Erreur de connexion ou d'exécution : " . $e->getMessage());
-}
 ?>
 
 <!DOCTYPE html>
@@ -39,37 +20,63 @@ try {
     <!-- Lien vers Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+<?php include 'frontend/composants/navbar.php'; ?>
 
-<div class="container my-2">
+<?php echo $alerts; ?>
+
+<div class="container">
+    <?php
+            // Tester une requête simple
+            try {
+                $query = $pdo->query("SELECT 'Connexion OK' AS message;");
+                $result = $query->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                echo "Erreur lors de l'exécution : " . $e->getMessage();
+            }
+
+            try {
+                // Récupérer les modules
+                $query = "SELECT * FROM modules";
+                $result = $pdo->query($query);
+            } catch (PDOException $e) {
+                die("Erreur de connexion ou d'exécution : " . $e->getMessage());
+            }
+    ?>
+</div>
+
+<div class="container w-100">
     <h1 class="text-center mb-4">Listes des véhicules.</h1>
     <?php include 'frontend/composants/bouton/boutonAdd.php'; ?>
     <?php include 'frontend/composants/formulaire/formulaire.php'; ?>
 
     <div class="row">
-        <?php while ($module = $result->fetch(PDO::FETCH_ASSOC)): ?>
-            <div class="card shadow-sm my-5" data-id="<?php echo htmlspecialchars($module['module_id']); ?>">
-                <div class="col-md-4 mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo htmlspecialchars($module['title']); ?></h5>
-
-                        <div class="d-flex flex-wrap">
-                            <span class="badge bg-primary me-2"><?php echo htmlspecialchars($module['category']); ?></span>
-                        </div>
-
-                        <p class="card-text mt-3">
-                            <strong>Type de carburant :</strong> <?php echo htmlspecialchars($module['fuel_type']); ?><br>
-                            <strong>Pilote :</strong> <?php echo htmlspecialchars($module['driver_name']); ?><br>
-                            <strong>Dernière mise à jour :</strong> <?php echo date('d M Y', strtotime($module['updated_at'])); ?>
-                        </p>
-                    </div>
-                </div>
+    <?php while ($module = $result->fetch(PDO::FETCH_ASSOC)): ?>
+        <div class="col-md-6 mb-3"> <!-- Ajout d'une colonne pour aligner les cartes -->
+            <div class="card shadow-sm my-1 mx-1" data-id="<?php echo htmlspecialchars($module['module_id']); ?>">
                 <?php include 'frontend/composants/graphic/graphic.php'; ?>
+                
+                <i class="fa-solid fa-chart-line fw-bold text-warning p-3 position-relative align-self-end"></i>
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo htmlspecialchars($module['title']); ?></h5>
+
+                    <div class="d-flex flex-wrap">
+                        <span class="badge bg-primary me-2"><?php echo htmlspecialchars($module['category']); ?></span>
+                    </div>
+
+                    <p class="card-text mt-3">
+                        <strong>Type de carburant :</strong> <?php echo htmlspecialchars($module['fuel_type']); ?><br>
+                        <strong>Pilote :</strong> <?php echo htmlspecialchars($module['driver_name']); ?><br>
+                        <strong>Dernière mise à jour :</strong> <?php echo date('d M Y', strtotime($module['updated_at'])); ?>
+                    </p>
+                </div>
             </div>
-            <?php endwhile; ?>
         </div>
-    </div>
+    <?php endwhile; ?>
+</div>
+
     
 <!-- Scripts Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

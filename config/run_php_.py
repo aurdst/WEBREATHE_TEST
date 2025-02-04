@@ -28,7 +28,7 @@ def job():
         os.remove(lock_file)
 
 # Planifie le job pour qu'il s'exécute toutes les minutes
-schedule.every(1).minutes.do(job)
+schedule.every(1).seconds.do(job)
 
 while True:
     schedule.run_pending()
