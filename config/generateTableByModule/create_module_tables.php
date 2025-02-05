@@ -35,6 +35,7 @@ try  {
                 brakes_changed BOOLEAN,
                 brakes_status VARCHAR(50),
                 victories INTEGER,
+                image_url VARCHAR(255),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (module_id) REFERENCES modules(module_id) ON DELETE CASCADE

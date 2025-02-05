@@ -37,6 +37,7 @@ try {
                 brakes_changed BOOLEAN,
                 brakes_status VARCHAR(50),
                 victories INTEGER,
+                image_url VARCHAR(255),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (module_id) REFERENCES modules(module_id) ON DELETE CASCADE
@@ -57,6 +58,7 @@ try {
         $brakes_changed = rand(0, 1);
         $brakes_status = ['Bon', 'Moyen', 'Mauvais'][rand(0, 2)];
         $victories = rand(0, 20);
+        $image_url = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nicepng.com%2Fmaxp%2Fu2y3q8q8q8i1o0w7%2F&psig=AOvVaw3bz9SlHwzREmYGjU6oPV8k&ust=1738855058527000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCICXhIbqrIsDFQAAAAAdAAAAABAn';
 
         // Insérer les données dans la table correspondante
         $insertQuery = "INSERT INTO $tableName (

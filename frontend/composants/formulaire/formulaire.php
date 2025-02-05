@@ -1,5 +1,9 @@
 <!-- Modal -->
-<div class="modal fade" id="addModuleModal" tabindex="-1" aria-labelledby="addModuleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModuleModal"
+  tabindex="-1"
+  aria-labelledby="addModuleModalLabel"
+  enctype="multipart/form-data"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -32,6 +36,8 @@
               <label for="description" class="form-label">Description :</label>
               <textarea class="form-control" id="description" name="description" rows="4"></textarea>
           </div>
+          <label for="image_url">Image du module:</label>
+          <input type="file" name="image_url" id="image_url">
           <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ajouter</button>
         </form>
       </div>

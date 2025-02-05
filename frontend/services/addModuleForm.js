@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // Optionnel : Réinitialiser le formulaire après l'envoi
           addModuleForm.reset();
-
+          location.reload();
         } else {
           alert('Erreur lors de l’ajout du module.');
           console.error('Erreur serveur :', response.statusText);

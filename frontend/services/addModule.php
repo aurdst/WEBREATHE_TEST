@@ -11,6 +11,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fuel_type = $_POST['fuel_type'] ?? '';
         $driver_name = $_POST['driver_name'] ?? '';
         $description = $_POST['description'] ?? '';
+        $image_url = $_POST['image_url'] ?? '';
+
+        $module = new stdClass();
+
+        if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] === UPLOAD_ERR_OK) {
+            // Définir le chemin de destination
+            $uploadDir = 'uploads/';
+            $imagePath = $uploadDir . basename($_FILES['image_url']['name']);
+            
+            // Déplacer l'image téléchargée vers le dossier de destination
+            if (move_uploaded_file($_FILES['image_url']['tmp_name'], $imagePath)) {
+                echo "Image téléchargée avec succès.";
+            } else {
+                echo "Erreur lors de l'upload de l'image.";
+            }
+
+            if ($_FILES['image_url']['error'] !== UPLOAD_ERR_OK) {
+                echo json_encode(['message' => 'Erreur lors de l\'upload de l\'image.', 'error_code' => $_FILES['image_url']['error']]);
+                exit;
+            }
+        
+            // Affecter le chemin de l'image à la propriété image_url
+            $module->image_url = $imagePath;
+        }
 
         // Validation basique
         if (empty($title) || empty($category) || empty($fuel_type) || empty($driver_name)) {
@@ -20,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Préparation et exécution
-        $query = "INSERT INTO modules (title, name, category, fuel_type, driver_name, description) VALUES (:title, :name, :category, :fuel_type, :driver_name, :description)";
+        $query = "INSERT INTO modules (title, name, category, fuel_type, driver_name, description, image_url)
+             VALUES (:title, :name, :category, :fuel_type, :driver_name, :description, :image_url)";
         $stmt = $pdo->prepare($query);
         $stmt->execute([
             ':title' => $title,
@@ -29,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':fuel_type' => $fuel_type,
             ':driver_name' => $driver_name,
             ':description' => $description,
+            ':image_url' => $module->image_url ?? $image_url,
         ]);
 
         // Réponse JSON en cas de succès

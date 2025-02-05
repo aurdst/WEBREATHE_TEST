@@ -60,18 +60,25 @@ use Models\Module;
                 <?php include 'frontend/composants/graphic/graphic.php'; ?>
                 
                 <i class="fa-solid fa-chart-line fw-bold text-warning p-3 position-relative align-self-end"></i>
-                <div class="card-body">
-                    <h5 class="card-title"><?php echo htmlspecialchars($module['title']); ?></h5>
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="card-title"><?php echo htmlspecialchars($module['title']); ?></h5>
+                        
+                        <div class="d-flex flex-wrap">
+                            <span class="badge bg-primary me-2"><?php echo htmlspecialchars($module['category']); ?></span>
+                        </div>
 
-                    <div class="d-flex flex-wrap">
-                        <span class="badge bg-primary me-2"><?php echo htmlspecialchars($module['category']); ?></span>
+                        <p class="card-text mt-3">
+                            <strong>Type de carburant :</strong> <?php echo htmlspecialchars($module['fuel_type']); ?><br>
+                            <strong>Pilote :</strong> <?php echo htmlspecialchars($module['driver_name']); ?><br>
+                            <strong>Dernière mise à jour :</strong> <?php echo date('d M Y', strtotime($module['updated_at'])); ?>
+                        </p>
                     </div>
 
-                    <p class="card-text mt-3">
-                        <strong>Type de carburant :</strong> <?php echo htmlspecialchars($module['fuel_type']); ?><br>
-                        <strong>Pilote :</strong> <?php echo htmlspecialchars($module['driver_name']); ?><br>
-                        <strong>Dernière mise à jour :</strong> <?php echo date('d M Y', strtotime($module['updated_at'])); ?>
-                    </p>
+                    <!-- Image alignée à droite -->
+                    <img src="frontend/services/<?php echo htmlspecialchars($module['image_url']); ?>" alt="Image du module" class="img-fluid rounded" style="max-width: 150px; height: auto;">
+                </div>
+                <div class="m-3">
                     <?php 
                         $moduleId = htmlspecialchars($module['module_id']); 
                         include 'frontend/composants/bouton/historyButton.php';

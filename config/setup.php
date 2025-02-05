@@ -62,6 +62,7 @@ try {
         fuel_per_lap NUMERIC(10, 2),
         driver_name VARCHAR(255),
         victories INTEGER DEFAULT 0,
+        image_url VARCHAR(255),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );";
@@ -112,6 +113,12 @@ try {
         $pdo->exec($addTiresStatusConstraintQuery);
         echo "Contrainte valid_tires_status ajoutée.\n";
     }
+
+    $alterTableQuery = "
+        ALTER TABLE modules
+        ADD COLUMN IF NOT EXISTS image_url VARCHAR(255);
+        ";
+        $pdo->exec($alterTableQuery);
 
 } catch (PDOException $e) {
     // En cas d'erreur de connexion ou d'exécution des requêtes
