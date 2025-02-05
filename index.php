@@ -51,6 +51,7 @@ use Models\Module;
     <h1 class="text-center mb-4">Listes des véhicules.</h1>
     <?php include 'frontend/composants/bouton/boutonAdd.php'; ?>
     <?php include 'frontend/composants/formulaire/formulaire.php'; ?>
+    <?php include 'frontend/composants/tables/tablesHistory.php'; ?>
 
     <div class="row">
     <?php while ($module = $result->fetch(PDO::FETCH_ASSOC)): ?>
@@ -71,6 +72,10 @@ use Models\Module;
                         <strong>Pilote :</strong> <?php echo htmlspecialchars($module['driver_name']); ?><br>
                         <strong>Dernière mise à jour :</strong> <?php echo date('d M Y', strtotime($module['updated_at'])); ?>
                     </p>
+                    <?php 
+                        $moduleId = htmlspecialchars($module['module_id']); 
+                        include 'frontend/composants/bouton/historyButton.php';
+                    ?>
                 </div>
             </div>
         </div>
@@ -80,8 +85,8 @@ use Models\Module;
     
 <!-- Scripts Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/script.js"></script>
 <script src="frontend/services/addModuleForm.js"></script>
+<script src="frontend/services/viewHistory.js"></script>
 <script src="frontend/composants/graphic/graphicToggle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module">
