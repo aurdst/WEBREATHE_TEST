@@ -28,9 +28,8 @@ try {
         </div>
       </div>';
     } else {
-        $alerts .= '<div class="container mt-3 p-3">
+        $alerts .= '<div class="container mt-1 p-1">
                 <div class="card border-warning" id="alert-card-bdd">
-                <button type="button" class="btn-close ms-auto m-2 position-absolute" data-bs-dismiss="alert" aria-label="Close" id="close-alert-bdd"></button>
                     <div class="card-body d-flex align-items-center">
                         <i class="bi bi-exclamation-triangle-fill text-warning fs-3 me-3"></i>
                         <div>
@@ -44,6 +43,21 @@ try {
 
     // Se connecter à la base de données créée
     $pdo = new PDO("pgsql:host={$_ENV['DB_HOST']};dbname=$dbName", $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
+
+    // Création de la table calculs si elle n'existe pas
+    $createTableClcQuery = "
+    CREATE TABLE IF NOT EXISTS calculs (
+        calcul_id SERIAL PRIMARY KEY,
+        module_id INTEGER NOT NULL REFERENCES modules(module_id) ON DELETE CASCADE,
+        status VARCHAR(50),
+        result TEXT,
+        message TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );";
+
+    // Exécution de la requête pour créer la table
+    $pdo->exec($createTableClcQuery);
 
     // Création de la table modules si elle n'existe pas
     $createTableQuery = "
@@ -69,9 +83,8 @@ try {
 
     // Exécution de la requête pour créer la table
     $pdo->exec($createTableQuery);
-    $alerts .= '<div class="container mt-3 p-3">
+    $alerts .= '<div class="container mt-1 p-1">
             <div class="card border-warning" id="alert-card-table">
-            <button type="button" class="btn-close ms-auto position-absolute" data-bs-dismiss="alert" aria-label="Close" id="close-alert-table"></button>
                 <div class="card-body d-flex align-items-center">
                     <i class="bi bi-exclamation-triangle-fill text-warning fs-3 me-3"></i>
                     <div>

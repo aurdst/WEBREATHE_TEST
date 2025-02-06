@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const viewHistoryButton = document.getElementById('showHistory');
     const historyContainer = document.getElementById('historyContainer');
 
     async function openHistory(moduleId) {
@@ -45,32 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ajout d'un écouteur sur tous les boutons "Historique"
     document.addEventListener('click', (event) => {
     // Vérifier si l'élément cliqué est un bouton "Historique"
-    if (event.target.classList.contains('historique-btn')) {
-        event.preventDefault();
+        if (event.target.classList.contains('historique-btn')) {
+            event.preventDefault();
 
-        const moduleId = event.target.getAttribute('data-module-id');
-        console.log("Bouton cliqué, Module ID :", moduleId);
+            const moduleId = event.target.getAttribute('data-module-id');
+            console.log("Bouton cliqué, Module ID :", moduleId);
 
-        if (moduleId) {
-            openHistory(moduleId);
-        } else {
-            console.error("Aucun module ID trouvé !");
+            if (moduleId) {
+                openHistory(moduleId);
+            } else {
+                console.error("Aucun module ID trouvé !");
+            }
         }
-    }
-});
-    // document.querySelectorAll('.historique-btn').forEach(button => {
-    //     button.addEventListener('click', (event) => {
-    //         event.preventDefault();
-    //         // Récupérer l'ID du module
-    //         const moduleId = button.getAttribute('data-module-id');
-
-    //         console.log("Bouton cliqué, Module ID :", moduleId);
-
-    //         if (moduleId) {
-    //             openHistory(moduleId);
-    //         } else {
-    //             console.error("Aucun module ID trouvé !");
-    //         }
-    //     });
-    // });
+    });
 });

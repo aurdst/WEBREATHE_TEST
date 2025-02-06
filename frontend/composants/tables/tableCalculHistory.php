@@ -1,9 +1,8 @@
-<!-- Modal -->
-<div class="modal fade" id="showHistory" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
+<div class="modal fade" id="showCalculHistory" tabindex="-1" aria-labelledby="historyCalculModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="historyModalLabel">Historique du véhicule</h5>
+        <h5 class="modal-title" id="historyCalculModalLabel">Historique des Calcul</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -15,7 +14,7 @@
               <th>Message</th>
             </tr>
           </thead>
-          <tbody id="historyContainer">
+          <tbody id="historyCalculContainer">
             <!-- Données injectées ici dynamiquement -->
           </tbody>
         </table>
@@ -23,3 +22,22 @@
     </div>
   </div>
 </div>
+
+<style>
+.bg-success {
+  background-color: #28a745 !important; /* Vert */
+}
+
+.bg-warning {
+  background-color: #fd7e14 !important; /* Orange */
+}
+
+.bg-danger {
+  background-color: #dc3545 !important; /* Rouge */
+}
+.badge {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+</style>

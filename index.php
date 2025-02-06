@@ -52,6 +52,7 @@ use Models\Module;
     <?php include 'frontend/composants/bouton/boutonAdd.php'; ?>
     <?php include 'frontend/composants/formulaire/formulaire.php'; ?>
     <?php include 'frontend/composants/tables/tablesHistory.php'; ?>
+    <?php include 'frontend/composants/tables/tableCalculHistory.php'; ?>
 
     <div class="row">
     <?php while ($module = $result->fetch(PDO::FETCH_ASSOC)): ?>
@@ -60,6 +61,13 @@ use Models\Module;
                 <?php include 'frontend/composants/graphic/graphic.php'; ?>
                 
                 <i class="fa-solid fa-chart-line fw-bold text-warning p-3 position-relative align-self-end"></i>
+
+                <div class="d-flex align-items-center p-3">
+                    <span class="badge bg-secondary module-status" data-id="<?php echo htmlspecialchars($module['module_id']); ?>">
+                        En attente
+                    </span>
+                </div>
+
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h5 class="card-title"><?php echo htmlspecialchars($module['title']); ?></h5>
@@ -84,6 +92,12 @@ use Models\Module;
                         include 'frontend/composants/bouton/historyButton.php';
                     ?>
                 </div>
+                <div class="m-3">
+                    <?php 
+                        $moduleId = htmlspecialchars($module['module_id']); 
+                        include 'frontend/composants/bouton/historyCalculButton.php';
+                    ?>
+                </div>
             </div>
         </div>
     <?php endwhile; ?>
@@ -95,11 +109,16 @@ use Models\Module;
 <script src="frontend/services/addModuleForm.js"></script>
 <script src="frontend/services/viewHistory.js"></script>
 <script src="frontend/composants/graphic/graphicToggle.js"></script>
+<script src="frontend/services/proccessingValue/process.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="frontend/services/viewCalculHistory.js"></script>
+
 <script type="module">
     import { fetchData } from './frontend/services/getStats.js';
     import { fetchRadarData } from './frontend/services/statsJs/getStatsWinRadar.js';
     import { fetchTiresData } from './frontend/services/statsJs/tiresStatus.js'
+
+    const showHistoryModal = new bootstrap.Modal(document.getElementById('showCalculHistory'));
 
     // Appeler la fonction pour récupérer les données et créer le graphique
     document.addEventListener('DOMContentLoaded', () => {
@@ -108,6 +127,21 @@ use Models\Module;
         fetchTiresData();
     });
 </script>
+
+<style>
+.bg-green {
+  background-color: #28a745 !important; /* Vert */
+}
+
+.bg-orange {
+  background-color: #fd7e14 !important; /* Orange */
+}
+
+.bg-red {
+  background-color: #dc3545 !important; /* Rouge */
+}
+
+</style>
 
 </body>
 </html>

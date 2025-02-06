@@ -22,11 +22,23 @@
           </div>
           <div class="mb-3">
             <label for="category" class="form-label">Catégorie</label>
-            <input type="text" class="form-control" id="category" name="category" required>
+            <select class="form-control" id="category" name="category" required>
+              <option value="" disabled selected>Choisir une catégorie</option>
+              <option value="F1">F1</option>
+              <option value="Rallye">Rallye</option>
+              <option value="Endurance">Endurance</option>
+              <option value="MotoGP">MotoGP</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="fuelType" class="form-label">Type de carburant</label>
-            <input type="text" class="form-control" id="fuelType" name="fuel_type" required>
+            <select class="form-control" id="fuelType" name="fuel_type" required>
+              <option value="" disabled selected>Choisir un type de carburant</option>
+              <option value="Essence">Essence</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Électrique">Électrique</option>
+              <option value="Hybride">Hybride</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="driverName" class="form-label">Nom du pilote</label>
@@ -38,7 +50,7 @@
           </div>
           <label for="image_url">Image du module:</label>
           <input type="file" name="image_url" id="image_url">
-          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ajouter</button>
+          <button type="submit" class="btn btn-warning" data-bs-dismiss="modal">Ajouter</button>
         </form>
       </div>
     </div>
