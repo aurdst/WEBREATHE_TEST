@@ -57,7 +57,7 @@ use Models\Module;
     <div class="row">
     <?php while ($module = $result->fetch(PDO::FETCH_ASSOC)): ?>
         <div class="col-md-6 mb-3"> <!-- Ajout d'une colonne pour aligner les cartes -->
-            <div class="card shadow-sm my-1 mx-1" data-id="<?php echo htmlspecialchars($module['module_id']); ?>">
+            <div class="card shadow-sm my-1 mx-1 bg-light" data-id="<?php echo htmlspecialchars($module['module_id']); ?>">
                 <?php include 'frontend/composants/graphic/graphic.php'; ?>
                 
                 <i class="fa-solid fa-chart-line fw-bold text-warning p-3 position-relative align-self-end"></i>
@@ -73,7 +73,7 @@ use Models\Module;
                         <h5 class="card-title"><?php echo htmlspecialchars($module['title']); ?></h5>
                         
                         <div class="d-flex flex-wrap">
-                            <span class="badge bg-primary me-2"><?php echo htmlspecialchars($module['category']); ?></span>
+                            <span class="badge bg-dark me-2"><?php echo htmlspecialchars($module['category']); ?></span>
                         </div>
 
                         <p class="card-text mt-3">
