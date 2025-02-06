@@ -8,6 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Vérifier si l'utilisateur est hors ligne
+    if (!navigator.onLine) {
+        showOfflineMessage();
+    }
+
+    function saveDataLocally(data) {
+        localStorage.setItem('historyData', JSON.stringify(data));
+    }
+    
+    function getLocalData() {
+        const savedData = localStorage.getItem('historyData');
+        return savedData ? JSON.parse(savedData) : null;
+    }
+
     // Fonction pour déterminer la couleur de la pastille
     function getStatusClass(status) {
         if (status === 'en cours de calcul') {
@@ -22,11 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fonction pour charger l'historique
     async function openCalculHistory(moduleId) {
+        const localData = getLocalData();  // Vérifier les données locales
+
+        if (localData) {
+            console.log('Données locales utilisées');
+            displayHistory(localData);  // Afficher les données locales
+            return;  // Arrêter ici si des données locales sont disponibles
+        }
         try {
             const response = await fetch(`frontend/services/viewCalculHistory.php?module_id=${moduleId}`);
             const history = await response.json();
 
-            console.log('response', history);
 
             // Vérification des erreurs retournées par PHP
             if (history.error) {
@@ -34,23 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Vider l'affichage actuel
-            historyCalculContainer.innerHTML = '';
-
-            // Générer les lignes du tableau selon la structure de ta table
-            history.forEach(h => {
-                const statusClass = getStatusClass(h.status); 
-                const historyRow = `
-                    <tr>
-                        <td>${new Date(h.created_at).toLocaleDateString()}</td>
-                        <td>
-                            <span class="badge ${statusClass}">${h.status}</span>
-                        </td>
-                        <td>${h.message}</td>
-                    </tr>
-                `;
-                historyCalculContainer.innerHTML += historyRow;
-            });
+            saveDataLocally(history);  // Sauvegarder les données en local
+            displayHistory(history);  // Afficher les données
 
             // Ouvrir le modal après avoir chargé l'historique
             showHistoryModal.show();
@@ -59,6 +64,25 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Erreur lors du chargement de l\'historique', err);
             historyCalculContainer.innerHTML = `<tr><td colspan="10" class="text-center text-danger">Impossible de charger les données</td></tr>`;
         }
+    }
+
+    // Fonction pour afficher l'historique
+    function displayHistory(history) {
+        historyCalculContainer.innerHTML = '';  // Vider l'affichage
+
+        history.forEach(h => {
+            const statusClass = getStatusClass(h.status);
+            const historyRow = `
+                <tr>
+                    <td>${new Date(h.created_at).toLocaleDateString()}</td>
+                    <td>
+                        <span class="badge ${statusClass}">${h.status}</span>
+                    </td>
+                    <td>${h.message}</td>
+                </tr>
+            `;
+            historyCalculContainer.innerHTML += historyRow;
+        });
     }
 
     // Ajout d'un écouteur sur tous les boutons "Historique"
