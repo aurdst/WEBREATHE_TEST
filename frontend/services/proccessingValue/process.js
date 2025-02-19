@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     function updateModuleStatus(moduleId, status) {
-        console.log(`Mise à jour du module ${moduleId} → ${status}`);
+        // Décommenter pour voir les status des calcul en cours
+        // console.log(`Mise à jour du module ${moduleId} → ${status}`);
 
         const statusBadge = document.querySelector(`.module-status[data-id='${moduleId}']`);
 
@@ -31,8 +32,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 statusBadge.className = "badge bg-secondary module-status"; // Gris
                 message = "En attente";
         }
-        // Envoi des informations au serveur via AJAX
-        sendModuleStatusToServer(moduleId, status, message);
+        // Envoi des informations au serveur via AJAX (Mis en pause pour evité la surcharge de données)
+        // Décommenter pour simuler les calculs
+        // sendModuleStatusToServer(moduleId, status, message);
     }
 
     function sendModuleStatusToServer(moduleId, status, message) {

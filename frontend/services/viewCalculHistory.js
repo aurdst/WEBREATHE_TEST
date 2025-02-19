@@ -38,11 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     async function openCalculHistory(moduleId) {
         const localData = getLocalData();  // Vérifier les données locales
 
-        if (localData) {
-            console.log('Données locales utilisées');
-            displayHistory(localData);  // Afficher les données locales
-            return;  // Arrêter ici si des données locales sont disponibles
-        }
         try {
             const response = await fetch(`frontend/services/viewCalculHistory.php?module_id=${moduleId}`);
             const history = await response.json();
@@ -64,6 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Erreur lors du chargement de l\'historique', err);
             historyCalculContainer.innerHTML = `<tr><td colspan="10" class="text-center text-danger">Impossible de charger les données</td></tr>`;
         }
+        // if (localData) {
+        //     console.log('Données locales utilisées');
+        //     console.log(localData)
+        //     displayHistory(localData);  // Afficher les données locales
+        //     return;  // Arrêter ici si des données locales sont disponibles
+        // }
     }
 
     // Fonction pour afficher l'historique

@@ -20,19 +20,21 @@ if (isset($_GET['module_id']) && !empty($_GET['module_id'])) {
     
     if ($tableExists) {
         // Requête SQL pour récupérer les données du module dans la table 'calculs'
-        $query = "SELECT * FROM calculs WHERE module_id = :module_id ORDER BY created_at DESC LIMIT 500";
+        $query = "SELECT * FROM calculs WHERE module_id = :module_id ORDER BY created_at DESC LIMIT 20";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':module_id', $moduleId, PDO::PARAM_INT);
         $stmt->execute();
     
         // Récupérer les données
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+
         // Vérifier si des données ont été trouvées
         if ($data) {
             echo json_encode($data);
+            die();
         } else {
             echo json_encode(["error" => "Aucune donnée trouvée pour ce module."]);
+            die();
         }
     } else {
         echo json_encode(["error" => "La table 'calculs' n'existe pas."]);

@@ -29,7 +29,7 @@ if (isset($_GET['module_id'])) {
     
     if ($tableExists) {
         // Requête SQL pour récupérer les données spécifiques au module_id
-        $query = "SELECT * FROM \"$tableName\" ORDER BY created_at DESC";
+        $query = "SELECT * FROM $tableName ORDER BY created_at DESC LIMIT 5";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
     
