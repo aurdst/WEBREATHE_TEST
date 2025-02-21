@@ -91,12 +91,17 @@ use Models\Module;
                         $moduleId = htmlspecialchars($module['module_id']); 
                         include 'frontend/composants/bouton/historyButton.php';
                     ?>
-                </div>
-                <div class="m-3">
                     <?php 
                         $moduleId = htmlspecialchars($module['module_id']); 
                         include 'frontend/composants/bouton/historyCalculButton.php';
                     ?>
+                </div>
+                <div class="m-3">
+                    <?php 
+                        $moduleId = htmlspecialchars($module['module_id']); 
+                        include 'frontend/composants/bouton/updateModuleBtn.php';
+                    ?>
+                     <?php include 'frontend/composants/formulaire/updateFormulaire.php'; ?>
                 </div>
             </div>
         </div>
@@ -107,6 +112,7 @@ use Models\Module;
 <!-- Scripts Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="frontend/services/addModuleForm.js"></script>
+<script src="frontend/services/updateModuleFormulaire.js"></script>
 <script src="frontend/services/viewHistory.js"></script>
 <script src="frontend/composants/graphic/graphicToggle.js"></script>
 <script src="frontend/services/proccessingValue/process.js"></script>
