@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     buttons.forEach(button => {
         button.addEventListener('click', async () => {
             const moduleId = button.dataset.moduleId;
-            console.log('Module ID:', moduleId); // Vérifie l'ID dans la console
 
             // Attends que la modal soit affichée
             const updateModal = new bootstrap.Modal(document.getElementById('updateModuleModal'));

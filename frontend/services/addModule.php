@@ -22,9 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             // Déplacer l'image téléchargée vers le dossier de destination
             if (move_uploaded_file($_FILES['image_url']['tmp_name'], $imagePath)) {
-                echo "Image téléchargée avec succès.";
-            } else {
-                echo "Erreur lors de l'upload de l'image.";
             }
 
             if ($_FILES['image_url']['error'] !== UPLOAD_ERR_OK) {

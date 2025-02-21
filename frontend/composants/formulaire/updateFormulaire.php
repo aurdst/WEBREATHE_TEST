@@ -12,7 +12,7 @@
       </div>
       <div class="modal-body">
       <form id="updateModuleForm" method="post">
-        <input type="hidden" id="module_id" name="module_id" value="">
+        <input type="hidden" id="module_id" name="module_id" value="" required>
           <div class="mb-3">
             <label for="title" class="form-label">Titre</label>
             <input type="text" class="form-control" id="title" name="title" required>
@@ -47,11 +47,11 @@
           </div>
           <div class="mb-3">
               <label for="description" class="form-label">Description :</label>
-              <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+              <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
           </div>
           <label for="image_url">Image du module:</label>
-          <input type="file" name="image_url" id="image_url">
-          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Mettre à jour</button>
+          <input type="file" name="image_url" id="image_url" required>
+          <button type="submit" class="btn btn-success">Mettre à jour</button>
         </form>
       </div>
     </div>

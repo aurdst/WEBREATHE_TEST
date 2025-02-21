@@ -46,11 +46,11 @@
           </div>
           <div class="mb-3">
               <label for="description" class="form-label">Description :</label>
-              <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+              <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
           </div>
           <label for="image_url">Image du module:</label>
-          <input type="file" name="image_url" id="image_url">
-          <button type="submit" class="btn btn-warning" data-bs-dismiss="modal">Ajouter</button>
+          <input type="file" name="image_url" id="image_url" required>
+          <button type="submit" class="btn btn-warning">Ajouter</button>
         </form>
       </div>
     </div>
