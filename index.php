@@ -101,7 +101,12 @@ use Models\Module;
                         $moduleId = htmlspecialchars($module['module_id']); 
                         include 'frontend/composants/bouton/updateModuleBtn.php';
                     ?>
-                     <?php include 'frontend/composants/formulaire/updateFormulaire.php'; ?>
+                    <?php 
+                        $moduleId = htmlspecialchars($module['module_id']); 
+                        include 'frontend/composants/bouton/deleteButon.php';
+                    ?>
+                    <?php include 'frontend/composants/popUp/popUpSuppression.php'; ?>
+                    <?php include 'frontend/composants/formulaire/updateFormulaire.php'; ?>
                 </div>
             </div>
         </div>
@@ -118,6 +123,7 @@ use Models\Module;
 <script src="frontend/services/proccessingValue/process.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="frontend/services/viewCalculHistory.js"></script>
+<script src="frontend/services/traitementJS/deleteModule.js"></script>
 
 <script type="module">
     import { fetchData } from './frontend/services/getStats.js';
@@ -146,8 +152,6 @@ use Models\Module;
 .bg-red {
   background-color: #dc3545 !important; /* Rouge */
 }
-
 </style>
-
 </body>
 </html>

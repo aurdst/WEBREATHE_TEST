@@ -1,13 +1,26 @@
+// Fonction pour forcer la fermeture de la modale et du backdrop
+function forceCloseModal() {
+    const backdrop = document.querySelector('.modal-backdrop');
+    if (backdrop) {
+        backdrop.remove();
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = 'auto'; // Réactive le scroll de la page
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('button[data-module-id]'); // Sélectionne tous les boutons avec data-module-id
+    // const buttons = document.querySelectorAll('button[data-module-id]');
 
     buttons.forEach(button => {
         button.addEventListener('click', async () => {
             const moduleId = button.dataset.moduleId;
 
-            // Attends que la modal soit affichée
             const updateModal = new bootstrap.Modal(document.getElementById('updateModuleModal'));
             updateModal.show();
+
+            updateModal._element.addEventListener('hidden.bs.modal', () => {
+                forceCloseModal();
+            });
 
             try {
                 const response = await fetch(`/frontend/services/getModuleById.php?id=${moduleId}`);
@@ -57,4 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+});
+
+document.getElementById('updateModuleModal').addEventListener('hidden.bs.modal', () => {
+    forceCloseModal();
 });

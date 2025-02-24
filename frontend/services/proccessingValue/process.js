@@ -61,8 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(() => {
                     updateModuleStatus(moduleId, "calcul interrompu");
 
-                    // 🔁 Relance le cycle après un délai aléatoire (entre 5 et 10 sec avant le redémarrage)
-                    setTimeout(() => cycleModuleStatus(moduleId), getRandomDelay(5000, 10000));
+                    // Relance le cycle après un délai aléatoire (entre 10 et 20 sec avant le redémarrage)
+                    setTimeout(() => cycleModuleStatus(moduleId), getRandomDelay(10000, 20000));
 
                 }, getRandomDelay(3000, 15000)); // Durée avant "calcul interrompu"
             }, getRandomDelay(6000, 20000)); // Durée avant "calcul ralenti"
